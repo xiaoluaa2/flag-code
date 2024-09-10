@@ -1,0 +1,108 @@
+{
+  "name": "flag-code",
+  "displayName": "flag-code",
+  "description": "",
+  "version": "0.0.3",
+  "engines": {
+    "vscode": "^1.92.0"
+  },
+  "icon": "resources/ikun.jpg",
+  "license": "MIT",
+  "publisher": "xiaolu2222",
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "extension.myRightClickCommand",
+        "title": "打上标记😀"
+      },
+      {
+        "command": "extension.editTreeItem",
+        "title": "✏️ 编辑标记or分组"
+      },
+      {
+        "command": "extension.deleteTreeItem",
+        "title": "❌ 删除标记or分组"
+      },
+      {
+        "command": "extension.createGroup",
+        "title": "📊 创建分组"
+      },
+      {
+        "command": "extension.changeColor",
+        "title": "🎨"
+      }
+    ],
+    "views": {
+      "package-flag": [
+        {
+          "id": "flagView",
+          "name": "flagView",
+          "draggable": true,
+          "dropTargets": [
+            "flagItem"
+          ]
+        }
+      ]
+    },
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "package-flag",
+          "title": "Package Flag",
+          "icon": "./resources/flag_1.svg"
+        }
+      ]
+    },
+    "menus": {
+      "editor/context": [
+        {
+          "command": "extension.myRightClickCommand",
+          "when": "editorTextFocus"
+        }
+      ],
+      "view/item/context": [
+        {
+          "command": "extension.deleteTreeItem",
+          "when": "viewItem == flagItem  || viewItem == flagItemGroup"
+        },
+        {
+          "command": "extension.editTreeItem",
+          "when": "viewItem == flagItem  || viewItem == flagItemGroup"
+        },
+        {
+          "command": "extension.createGroup",
+          "when": "viewItem == flagItem"
+        },
+        {
+          "command": "extension.changeColor",
+          "when": "viewItem == flagItem",
+          "group": "inline"
+        }
+      ]
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "pretest": "npm run compile && npm run lint",
+    "lint": "eslint src --ext ts",
+    "test": "vscode-test"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.92.0",
+    "@types/mocha": "^10.0.7",
+    "@types/node": "20.x",
+    "@typescript-eslint/eslint-plugin": "^7.14.1",
+    "@typescript-eslint/parser": "^7.11.0",
+    "eslint": "^8.57.0",
+    "typescript": "^5.4.5",
+    "@vscode/test-cli": "^0.0.9",
+    "@vscode/test-electron": "^2.4.0"
+  }
+}
